@@ -18,16 +18,26 @@ router.post('/', (req, res) => {
         });
     }
 });
-//add a comment to a post by post id
-router.post(`/api/posts/:post_id/comments`, (req, res) => {
-    const id = req.params.post_id;
-    const comment = req.body;
+// //add a comment to a post by post id
+// router.post(`/:post_id/comments`, (req, res) => {
+//     const post_id = req.params.post_id;
+//     const comment = req.body;
 
-    if(comment.text === "" || typeof text !== "string") {
-        res.status(400).json({ errorMessage: "Please provide text for the comment"});
-    } else {
+//     if(comment.text === "" || typeof text !== "string") {
+//         res.status(400).json({ errorMessage: "Please provide text for the comment"});
+//     } else {
+//         dataBlog.insertComment(comment, post_id)
+//     }
+// })
 
-    }
-})
+router.get('/', (req, res) => {
+    dataBlog.find(req.query)
+    .then(posts => {
+        res.status(200).json(posts);
+    })
+    .catch(error => {
+        res.status(500).json({ error: "The posts could not be recieved" });
+    });
+});
 
 module.exports = router;
