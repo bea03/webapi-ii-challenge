@@ -1,6 +1,6 @@
 //imports
 const express = require('express');
-const postRouter = require('./routers/post-Router.js');
+const postsRouter = require('./routers/postsRouter.js');
 
 //create a server
 const server = express();
@@ -9,7 +9,7 @@ const server = express();
 server.use(express.json());
 
 //telling the server to use the router for /api/posts
-server.use('/api/posts', postRouter);
+server.use('/api/posts', postsRouter);
 
 //request handlers
 server.get('/', (req, res) => {
