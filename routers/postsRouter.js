@@ -36,8 +36,25 @@ router.get('/', (req, res) => {
         res.status(200).json(posts);
     })
     .catch(error => {
-        res.status(500).json({ error: "The posts could not be recieved" });
+        res.status(500).json({ error: "The posts information could not be retrieved." });
     });
+});
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+     
+        
+        if(!id) {
+            res.status(404).json({ message: "The post with the specified ID does not exist." });
+        } else {
+            dataBlog.findById(id)
+        .then(id => {
+            res.status(200).json(id);
+        })
+        .catch(error => {
+            res.status(500).json({ error: "The post information could not be retrieved." }); 
+        });
+    }
 });
 
 module.exports = router;
